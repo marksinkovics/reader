@@ -16,6 +16,13 @@
 		C3CAA38E2A35156300ADECB2 /* ReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA38D2A35156300ADECB2 /* ReaderTests.swift */; };
 		C3CAA3982A35156300ADECB2 /* ReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3972A35156300ADECB2 /* ReaderUITests.swift */; };
 		C3CAA39A2A35156300ADECB2 /* ReaderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3992A35156300ADECB2 /* ReaderUITestsLaunchTests.swift */; };
+		C3CAA3A72A35207800ADECB2 /* AddSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3A62A35207800ADECB2 /* AddSourceView.swift */; };
+		C3CAA3A92A390C8D00ADECB2 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3A82A390C8D00ADECB2 /* AsyncButton.swift */; };
+		C3CAA3AB2A39137600ADECB2 /* FeedSourceUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3AA2A39137600ADECB2 /* FeedSourceUpdater.swift */; };
+		C3CAA3AE2A394BEF00ADECB2 /* ParserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3AD2A394BEF00ADECB2 /* ParserModels.swift */; };
+		C3CAA3B02A394C2700ADECB2 /* BaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3AF2A394C2700ADECB2 /* BaseParser.swift */; };
+		C3CAA3B22A394C5900ADECB2 /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3B12A394C5900ADECB2 /* RSSParser.swift */; };
+		C3CAA3B42A39580E00ADECB2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3B32A39580E00ADECB2 /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +56,13 @@
 		C3CAA3932A35156300ADECB2 /* ReaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CAA3972A35156300ADECB2 /* ReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderUITests.swift; sourceTree = "<group>"; };
 		C3CAA3992A35156300ADECB2 /* ReaderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C3CAA3A62A35207800ADECB2 /* AddSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceView.swift; sourceTree = "<group>"; };
+		C3CAA3A82A390C8D00ADECB2 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
+		C3CAA3AA2A39137600ADECB2 /* FeedSourceUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSourceUpdater.swift; sourceTree = "<group>"; };
+		C3CAA3AD2A394BEF00ADECB2 /* ParserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserModels.swift; sourceTree = "<group>"; };
+		C3CAA3AF2A394C2700ADECB2 /* BaseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseParser.swift; sourceTree = "<group>"; };
+		C3CAA3B12A394C5900ADECB2 /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
+		C3CAA3B32A39580E00ADECB2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +113,7 @@
 		C3CAA3752A35156100ADECB2 /* Reader */ = {
 			isa = PBXGroup;
 			children = (
+				C3CAA3AC2A394BDF00ADECB2 /* Parser */,
 				C3CAA3762A35156100ADECB2 /* ReaderApp.swift */,
 				C3CAA3782A35156100ADECB2 /* Persistence.swift */,
 				C3CAA37D2A35156100ADECB2 /* ContentView.swift */,
@@ -106,6 +121,10 @@
 				C3CAA3812A35156300ADECB2 /* Reader.entitlements */,
 				C3CAA37A2A35156100ADECB2 /* Reader.xcdatamodeld */,
 				C3CAA3822A35156300ADECB2 /* Preview Content */,
+				C3CAA3A62A35207800ADECB2 /* AddSourceView.swift */,
+				C3CAA3A82A390C8D00ADECB2 /* AsyncButton.swift */,
+				C3CAA3AA2A39137600ADECB2 /* FeedSourceUpdater.swift */,
+				C3CAA3B32A39580E00ADECB2 /* WebView.swift */,
 			);
 			path = Reader;
 			sourceTree = "<group>";
@@ -133,6 +152,16 @@
 				C3CAA3992A35156300ADECB2 /* ReaderUITestsLaunchTests.swift */,
 			);
 			path = ReaderUITests;
+			sourceTree = "<group>";
+		};
+		C3CAA3AC2A394BDF00ADECB2 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				C3CAA3AD2A394BEF00ADECB2 /* ParserModels.swift */,
+				C3CAA3AF2A394C2700ADECB2 /* BaseParser.swift */,
+				C3CAA3B12A394C5900ADECB2 /* RSSParser.swift */,
+			);
+			path = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,8 +296,15 @@
 			files = (
 				C3CAA3772A35156100ADECB2 /* ReaderApp.swift in Sources */,
 				C3CAA37C2A35156100ADECB2 /* Reader.xcdatamodeld in Sources */,
+				C3CAA3A92A390C8D00ADECB2 /* AsyncButton.swift in Sources */,
+				C3CAA3AB2A39137600ADECB2 /* FeedSourceUpdater.swift in Sources */,
+				C3CAA3A72A35207800ADECB2 /* AddSourceView.swift in Sources */,
 				C3CAA37E2A35156100ADECB2 /* ContentView.swift in Sources */,
+				C3CAA3AE2A394BEF00ADECB2 /* ParserModels.swift in Sources */,
+				C3CAA3B02A394C2700ADECB2 /* BaseParser.swift in Sources */,
 				C3CAA3792A35156100ADECB2 /* Persistence.swift in Sources */,
+				C3CAA3B22A394C5900ADECB2 /* RSSParser.swift in Sources */,
+				C3CAA3B42A39580E00ADECB2 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

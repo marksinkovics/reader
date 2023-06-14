@@ -1,10 +1,3 @@
-//
-//  ReaderApp.swift
-//  Reader
-//
-//  Created by Mark Sinkovics on 2023-06-10.
-//
-
 import SwiftUI
 
 @main

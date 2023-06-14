@@ -1,76 +1,128 @@
-//
-//  ContentView.swift
-//  Reader
-//
-//  Created by Mark Sinkovics on 2023-06-10.
-//
-
 import SwiftUI
 import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \FeedSource.title, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var feedSources: FetchedResults<FeedSource>
+    @State private var selectedFeedSource: FeedSource?
+    @State private var selectedFeedItem: FeedItem?
+
+    @State var shouldPresentAddSourceView = false
+    @State private var visibility: NavigationSplitViewVisibility = .all
+
+    private func addItem() {
+        shouldPresentAddSourceView.toggle()
+    }
+
+    private var feedSourceUpdater = FeedSourceUpdater();
+
+    private func fetchContent() async {
+        for source in feedSources {
+            await feedSourceUpdater.update(source: source, context: viewContext);
+        }
+
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+
+    }
+
+    private func delete(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { feedSources[$0] }.forEach(viewContext.delete)
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+
+    private func delete(feedSource: FeedSource) {
+        withAnimation {
+            viewContext.delete(feedSource);
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+        NavigationSplitView(columnVisibility: $visibility) {
+            List(selection: $selectedFeedSource) {
+                ForEach(feedSources, id: \.self) { feedSource in
+                    NavigationLink(value: feedSource) {
+                        Text(verbatim: feedSource.title ?? "Unknown")
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: delete)
             }
-            .toolbar {
-#if os(iOS)
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            #if os(macOS)
+            .contextMenu {
+                    Button {
+                        if let feedSource = selectedFeedSource {
+                            delete(feedSource: feedSource)
+                        }
+                    } label: {
+                        Label("Remove", systemImage: "minus.circle")
+                    }
                 }
-#endif
+            #endif
+            .navigationTitle("Feeds")
+            .toolbar {
                 ToolbarItem {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
                     }
+                    .sheet(isPresented: $shouldPresentAddSourceView) {
+                        AddSourceView()
+                    }
+                }
+                ToolbarItem {
+                    AsyncButton(
+                        systemImageName: "arrow.triangle.2.circlepath",
+                        action: fetchContent
+                    )
                 }
             }
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } content: {
+            if let selectedFeedSource, let items = selectedFeedSource.items?.allObjects as? [FeedItem] {
+                List(selection: $selectedFeedItem) {
+                    ForEach(items, id: \.self) { item in
+                        NavigationLink(value: item) {
+                            Text(verbatim: item.title ?? "Unknown")
+                        }
+                    }
+                }
+                .navigationTitle(selectedFeedSource.title ?? "Unknown")
+            } else {
+                Text("Choose a source from the sidebar")
             }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        } detail: {
+            NavigationStack {
+                ZStack {
+                    if let selectedFeedItem {
+                        WebView(htmlContent: selectedFeedItem.desc!)
+                        .navigationTitle(selectedFeedItem.title ?? "Unknown")
+                        .toolbar {
+                            Button("Focus") {
+                                visibility = .detailOnly
+                            }
+                        }
+                    } else {
+                        Text("Choose an item from the content")
+                    }
+                }
             }
         }
     }

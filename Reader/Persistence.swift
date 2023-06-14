@@ -1,10 +1,3 @@
-//
-//  Persistence.swift
-//  Reader
-//
-//  Created by Mark Sinkovics on 2023-06-10.
-//
-
 import CoreData
 
 struct PersistenceController {
@@ -13,9 +6,13 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for index in 0..<10 {
+            let newFeedSource = FeedSource(context: viewContext)
+            newFeedSource.title = "Feed source \(index)"
+            newFeedSource.createdAt = Date()
+            newFeedSource.fetchedAt = Date()
+            newFeedSource.updatedAt = Date()
+            newFeedSource.url = URL(string: "https://example.com/\(index)/feed.xml")!
         }
         do {
             try viewContext.save()
