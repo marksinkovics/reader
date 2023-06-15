@@ -6,7 +6,7 @@ class FeedSourceUpdater: NSObject {
     private func update(feedItem: FeedItem, with item: ParsedItem) {
         feedItem.title = item.title
         feedItem.link = item.link
-        feedItem.author = item.author
+        feedItem.author = item.author?.name ?? "Unkown"
         feedItem.publishedAt = item.publishedAt
         feedItem.updatedAt = item.updatedAt ?? Date()
 //        feedItem.categories = item.categories
@@ -32,21 +32,18 @@ class FeedSourceUpdater: NSObject {
 
             // Determine RSS or ATOM
 
-            let sourceParser = FeedSourceRSSParser(data: data);
-            sourceParser.parse()
+            let parser = FeedParser (data: data);
+            parser.parse()
 
-            if let parsedSource = sourceParser.source {
+            if let parsedSource = parser.source {
                 update(feedSource: source, with: parsedSource)
             }
-
-            let itemsParser = FeedSourceItemsRSSParser(data: data);
-            itemsParser.parse()
 
             if let sourceItems = source.items {
                 source.removeFromItems(sourceItems)
             }
 
-            for item in itemsParser.items {
+            for item in parser.items {
                 let newItem = FeedItem(context: context)
                 update(feedItem: newItem, with: item)
                 source.addToItems(newItem)

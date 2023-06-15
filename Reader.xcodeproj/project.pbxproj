@@ -21,7 +21,7 @@
 		C3CAA3AB2A39137600ADECB2 /* FeedSourceUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3AA2A39137600ADECB2 /* FeedSourceUpdater.swift */; };
 		C3CAA3AE2A394BEF00ADECB2 /* ParserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3AD2A394BEF00ADECB2 /* ParserModels.swift */; };
 		C3CAA3B02A394C2700ADECB2 /* BaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3AF2A394C2700ADECB2 /* BaseParser.swift */; };
-		C3CAA3B22A394C5900ADECB2 /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3B12A394C5900ADECB2 /* RSSParser.swift */; };
+		C3CAA3B22A394C5900ADECB2 /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3B12A394C5900ADECB2 /* FeedParser.swift */; };
 		C3CAA3B42A39580E00ADECB2 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3B32A39580E00ADECB2 /* WebView.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,7 +61,7 @@
 		C3CAA3AA2A39137600ADECB2 /* FeedSourceUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSourceUpdater.swift; sourceTree = "<group>"; };
 		C3CAA3AD2A394BEF00ADECB2 /* ParserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserModels.swift; sourceTree = "<group>"; };
 		C3CAA3AF2A394C2700ADECB2 /* BaseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseParser.swift; sourceTree = "<group>"; };
-		C3CAA3B12A394C5900ADECB2 /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
+		C3CAA3B12A394C5900ADECB2 /* FeedParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParser.swift; sourceTree = "<group>"; };
 		C3CAA3B32A39580E00ADECB2 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,7 +159,7 @@
 			children = (
 				C3CAA3AD2A394BEF00ADECB2 /* ParserModels.swift */,
 				C3CAA3AF2A394C2700ADECB2 /* BaseParser.swift */,
-				C3CAA3B12A394C5900ADECB2 /* RSSParser.swift */,
+				C3CAA3B12A394C5900ADECB2 /* FeedParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -180,6 +180,8 @@
 			dependencies = (
 			);
 			name = Reader;
+			packageProductDependencies = (
+			);
 			productName = Reader;
 			productReference = C3CAA3732A35156100ADECB2 /* Reader.app */;
 			productType = "com.apple.product-type.application";
@@ -252,6 +254,8 @@
 				Base,
 			);
 			mainGroup = C3CAA36A2A35156000ADECB2;
+			packageReferences = (
+			);
 			productRefGroup = C3CAA3742A35156100ADECB2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -303,7 +307,7 @@
 				C3CAA3AE2A394BEF00ADECB2 /* ParserModels.swift in Sources */,
 				C3CAA3B02A394C2700ADECB2 /* BaseParser.swift in Sources */,
 				C3CAA3792A35156100ADECB2 /* Persistence.swift in Sources */,
-				C3CAA3B22A394C5900ADECB2 /* RSSParser.swift in Sources */,
+				C3CAA3B22A394C5900ADECB2 /* FeedParser.swift in Sources */,
 				C3CAA3B42A39580E00ADECB2 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

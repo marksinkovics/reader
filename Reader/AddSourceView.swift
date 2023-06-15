@@ -36,7 +36,7 @@ struct AddSourceView: View {
         newFeedSource.createdAt = Date()
         newFeedSource.fetchedAt = Date()
         newFeedSource.updatedAt = Date()
-        newFeedSource.url = URL(string: sourceURL)!
+        newFeedSource.url = URL(string: sourceURL.trimmingCharacters(in: .whitespacesAndNewlines))!
 
         do {
             try context.save()
