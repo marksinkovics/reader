@@ -5,18 +5,18 @@ struct ParsedAuthor {
 }
 
 struct ParsedItem {
-    var title: String? = nil
+    var title: String = ""
     var link: URL? = nil
     var author: ParsedAuthor? = nil
-    var publishedAt: Date? = nil
-    var updatedAt: Date? = nil
+    var publishedAt: Date = Date()
+    var updatedAt: Date = Date()
     var categories: [String] = []
-    var guid: String? = nil
+    var guid: String = ""
     var desc: String = ""
 }
 
 struct ParsedSource {
-    var title: String?
-    var desc: String?
-    var link: URL?
+    var title: String = ""
+    var desc: String = ""
+    var link: URL? = nil
 }

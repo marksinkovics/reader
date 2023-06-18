@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FeedCategories" representedClassName="FeedCategories" syncable="YES" codeGenerationType="class"/>
-    <entity name="FeedItem" representedClassName="FeedItem" syncable="YES" codeGenerationType="class">
-        <attribute name="author" optional="YES" attributeType="String"/>
-        <attribute name="desc" attributeType="String" defaultValueString="&quot;&quot;"/>
-        <attribute name="guid" attributeType="String" defaultValueString="&quot;&quot;"/>
+    <entity name="FeedItem" representedClassName="FeedItem" syncable="YES">
+        <attribute name="author" attributeType="String" defaultValueString=""/>
+        <attribute name="desc" attributeType="String"/>
+        <attribute name="guid" attributeType="String" defaultValueString=""/>
         <attribute name="link" optional="YES" attributeType="URI"/>
         <attribute name="publishedAt" attributeType="Date" defaultDateTimeInterval="694245600" usesScalarValueType="NO"/>
-        <attribute name="title" attributeType="String" defaultValueString="&quot;&quot;"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
         <attribute name="updatedAt" attributeType="Date" defaultDateTimeInterval="694245600" usesScalarValueType="NO"/>
         <relationship name="source" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FeedSource" inverseName="items" inverseEntity="FeedSource"/>
     </entity>
-    <entity name="FeedSource" representedClassName="FeedSource" syncable="YES" codeGenerationType="class">
+    <entity name="FeedSource" representedClassName="FeedSource" syncable="YES">
         <attribute name="createdAt" attributeType="Date" defaultDateTimeInterval="694245600" usesScalarValueType="NO"/>
-        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="desc" attributeType="String" defaultValueString=""/>
         <attribute name="fetchedAt" attributeType="Date" defaultDateTimeInterval="694245600" usesScalarValueType="NO"/>
         <attribute name="link" optional="YES" attributeType="URI"/>
-        <attribute name="title" attributeType="String" defaultValueString="&quot;&quot;"/>
+        <attribute name="title" attributeType="String"/>
         <attribute name="updatedAt" attributeType="Date" defaultDateTimeInterval="694245600" usesScalarValueType="NO"/>
         <attribute name="url" attributeType="URI"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FeedItem" inverseName="source" inverseEntity="FeedItem"/>

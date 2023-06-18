@@ -1,5 +1,6 @@
 import Foundation
 
+
 class FeedParser: BaseParser {
 
     enum FeedType {
@@ -9,12 +10,6 @@ class FeedParser: BaseParser {
     }
 
     var type: FeedType = .unknown
-
-    lazy var dateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EE, d MMM yyyy HH:mm:ss Z"
-        return formatter
-    }()
 
     var items: [ParsedItem] = []
     var nextItem: ParsedItem?
@@ -35,6 +30,15 @@ class FeedParser: BaseParser {
             isParsingHeader = false
             nextItem = ParsedItem()
             textBuffer = ""
+        case "author":
+            if isParsingHeader {
+                break
+            }
+
+            if type == .Atom {
+                nextItem?.author = ParsedAuthor()
+            }
+
         default:
             break;
         }
@@ -75,19 +79,18 @@ class FeedParser: BaseParser {
             if isParsingHeader {
                 break
             }
+
             if type == .RSS {
-                nextItem?.author?.name = textBuffer.trimmingCharacters(in: .whitespacesAndNewlines)
-            } else if type == .Atom {
                 nextItem?.author?.name = textBuffer.trimmingCharacters(in: .whitespacesAndNewlines)
             }
         case "published":
-            nextItem?.publishedAt = ISO8601DateFormatter().date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines))
+            nextItem?.publishedAt = ISO8601DateFormatter().date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines)) ?? Date()
         case "pubDate":
-            nextItem?.publishedAt = dateFormatter.date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines))
+            nextItem?.publishedAt = RFC822DateFormatter().date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines)) ?? Date()
         case "updated":
-            nextItem?.updatedAt = ISO8601DateFormatter().date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines))
+            nextItem?.updatedAt = ISO8601DateFormatter().date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines)) ?? Date()
         case "atom:updated":
-            nextItem?.updatedAt = dateFormatter.date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines))
+            nextItem?.updatedAt = RFC822DateFormatter().date(from: textBuffer.trimmingCharacters(in: .whitespacesAndNewlines)) ?? Date()
         case "category":
             nextItem?.categories.append(textBuffer.trimmingCharacters(in: .whitespacesAndNewlines))
         case "guid", "id":

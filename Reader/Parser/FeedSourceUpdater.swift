@@ -6,10 +6,9 @@ class FeedSourceUpdater: NSObject {
     private func update(feedItem: FeedItem, with item: ParsedItem) {
         feedItem.title = item.title
         feedItem.link = item.link
-        feedItem.author = item.author?.name ?? "Unkown"
+        feedItem.author = item.author?.name ?? ""
         feedItem.publishedAt = item.publishedAt
-        feedItem.updatedAt = item.updatedAt ?? Date()
-//        feedItem.categories = item.categories
+        feedItem.updatedAt = item.updatedAt
         feedItem.guid = item.guid
         feedItem.desc = item.desc
     }
@@ -24,11 +23,9 @@ class FeedSourceUpdater: NSObject {
 
     func update(source: FeedSource, context: NSManagedObjectContext) async {
 
-        guard let url = source.url else { return }
-
-        print("Fetching url: \(url)");
+        print("Fetching url: \(source.url)");
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession.shared.data(from: source.url)
 
             // Determine RSS or ATOM
 
