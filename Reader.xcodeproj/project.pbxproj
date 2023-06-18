@@ -17,6 +17,8 @@
 		C394D4082A3E210700B7B0B9 /* FeedSourceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394D4072A3E210700B7B0B9 /* FeedSourceListView.swift */; };
 		C394D40A2A3E75AC00B7B0B9 /* FeedItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394D4092A3E75AC00B7B0B9 /* FeedItemListView.swift */; };
 		C394D40C2A3E7C9200B7B0B9 /* FeedItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394D40B2A3E7C9200B7B0B9 /* FeedItemDetailView.swift */; };
+		C394D4102A3EAC4E00B7B0B9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394D40F2A3EAC4E00B7B0B9 /* MainView.swift */; };
+		C394D4122A3EB30D00B7B0B9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C394D4112A3EB30D00B7B0B9 /* SettingsView.swift */; };
 		C3CAA3772A35156100ADECB2 /* ReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3762A35156100ADECB2 /* ReaderApp.swift */; };
 		C3CAA3792A35156100ADECB2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA3782A35156100ADECB2 /* Persistence.swift */; };
 		C3CAA37C2A35156100ADECB2 /* Reader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C3CAA37A2A35156100ADECB2 /* Reader.xcdatamodeld */; };
@@ -63,6 +65,8 @@
 		C394D4072A3E210700B7B0B9 /* FeedSourceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSourceListView.swift; sourceTree = "<group>"; };
 		C394D4092A3E75AC00B7B0B9 /* FeedItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemListView.swift; sourceTree = "<group>"; };
 		C394D40B2A3E7C9200B7B0B9 /* FeedItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemDetailView.swift; sourceTree = "<group>"; };
+		C394D40F2A3EAC4E00B7B0B9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C394D4112A3EB30D00B7B0B9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C3CAA3732A35156100ADECB2 /* Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CAA3762A35156100ADECB2 /* ReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderApp.swift; sourceTree = "<group>"; };
 		C3CAA3782A35156100ADECB2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -181,11 +185,13 @@
 				C3CAA3AC2A394BDF00ADECB2 /* Parser */,
 				C3CAA3762A35156100ADECB2 /* ReaderApp.swift */,
 				C3CAA37D2A35156100ADECB2 /* ContentView.swift */,
+				C394D40F2A3EAC4E00B7B0B9 /* MainView.swift */,
 				C3CAA37F2A35156300ADECB2 /* Assets.xcassets */,
 				C3CAA3812A35156300ADECB2 /* Reader.entitlements */,
 				C3CAA37A2A35156100ADECB2 /* Reader.xcdatamodeld */,
 				C3CAA3822A35156300ADECB2 /* Preview Content */,
 				C3CAA3B32A39580E00ADECB2 /* WebView.swift */,
+				C394D4112A3EB30D00B7B0B9 /* SettingsView.swift */,
 			);
 			path = Reader;
 			sourceTree = "<group>";
@@ -361,12 +367,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3CAA3772A35156100ADECB2 /* ReaderApp.swift in Sources */,
+				C394D4122A3EB30D00B7B0B9 /* SettingsView.swift in Sources */,
 				C394D40C2A3E7C9200B7B0B9 /* FeedItemDetailView.swift in Sources */,
 				C3CAA37C2A35156100ADECB2 /* Reader.xcdatamodeld in Sources */,
 				C394D4012A3E1B5B00B7B0B9 /* FeedSource+CoreDataClass.swift in Sources */,
 				C394D4042A3E1F1F00B7B0B9 /* FeedSourceView.swift in Sources */,
 				C3CAA3A92A390C8D00ADECB2 /* AsyncButton.swift in Sources */,
 				C394D3F92A3E03FF00B7B0B9 /* FeedItemView.swift in Sources */,
+				C394D4102A3EAC4E00B7B0B9 /* MainView.swift in Sources */,
 				C3CAA3AB2A39137600ADECB2 /* FeedSourceUpdater.swift in Sources */,
 				C3CAA3A72A35207800ADECB2 /* AddSourceView.swift in Sources */,
 				C3CAA37E2A35156100ADECB2 /* ContentView.swift in Sources */,

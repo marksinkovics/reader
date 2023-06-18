@@ -7,12 +7,32 @@ struct FeedSourceListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \FeedSource.title, ascending: true)],
         animation: .default)
     private var feedSources: FetchedResults<FeedSource>
-    @State var shouldPresentAddSourceView = false
+
+    enum SheetType: Identifiable {
+        var id: Self { self }
+        case addSource
+        case showSettings
+    }
+
+    @State private var currentSheet: SheetType? = nil
+
+
 
     @Binding var selectedFeedSource: FeedSource?
 
     private func addItem() {
-        shouldPresentAddSourceView.toggle()
+        currentSheet = .addSource
+    }
+
+    #if os(macOS)
+    @Environment(\.openWindow) var openWindow
+    #endif
+    private func openSettings() {
+        #if os(macOS)
+        openWindow(id: "reader_app.settings")
+        #else
+        currentSheet = .showSettings
+        #endif
     }
 
     private var feedSourceUpdater = FeedSourceUpdater();
@@ -84,10 +104,7 @@ struct FeedSourceListView: View {
         .toolbar {
             ToolbarItem {
                 Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
-                }
-                .sheet(isPresented: $shouldPresentAddSourceView) {
-                    AddSourceView()
+                    Label("Add new source", systemImage: "plus")
                 }
             }
             ToolbarItem {
@@ -95,6 +112,34 @@ struct FeedSourceListView: View {
                     systemImageName: "arrow.triangle.2.circlepath",
                     action: fetchContent
                 )
+            }
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Section {
+                        Button(action: addItem) {
+                            Label("Add new source", systemImage: "plus")
+                        }
+                        Button(action: {}) {
+                            Label("Fetch sources", systemImage: "arrow.triangle.2.circlepath")
+                        }
+                    }
+                    Section {
+                        Button(action: openSettings) {
+                            Label("Settings", systemImage: "gearshape")
+                        }
+                    }
+                }
+                label: {
+                    Label("Context", systemImage: "ellipsis.circle")
+                }
+            }
+        }
+        .sheet(item: $currentSheet, onDismiss: {currentSheet = nil}) { type in
+            switch type {
+            case .addSource:
+                AddSourceView()
+            case .showSettings:
+                SettingsView()
             }
         }
     }
